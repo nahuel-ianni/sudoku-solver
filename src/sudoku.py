@@ -31,16 +31,16 @@ def is_completed(grid):
     return not any(0 in row for row in grid)
 
 
-def is_safe(grid, cell, digit):
+def is_unique(digit, cell, grid):
     """Checks if a given digit is unique across its row, column and subgrid.
     
     Arguments:
-        grid {number matrix} -- The matrix to check the digit at
-        cell {tuple} -- The (x, y) coordinates of the digit on the grid
         digit {number} -- The digit to check for
+        cell {tuple} -- The (x, y) coordinates of the digit on the grid
+        grid {number matrix} -- The matrix to check the digit at
 
     Returns:
-        Boolean -- True if the digit is unique on its respective row and column, otherwise, False
+        Boolean -- True if the digit is unique on its respective row, column and subgrid, otherwise, False
     """
     x, y = cell
     column = [row[x] for row in grid]

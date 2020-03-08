@@ -1,6 +1,6 @@
 import unittest
 
-from sudoku import find_empty_location, is_completed, is_safe, solve
+from sudoku import find_empty_location, is_completed, is_unique, solve
 
 
 class SudokuTest(unittest.TestCase):
@@ -36,46 +36,46 @@ class SudokuTest(unittest.TestCase):
     def test_is_completed_incomplete_row(self):
         self.assertFalse(is_completed([[1, 0]]))
 
-    # Is safe function tests
+    # Is unique function tests
 
-    def test_is_safe_not_on_column(self):
-        self.assertFalse(is_safe([[1, 3, 5, 7, 9], [2, 4, 6, 0, 0]], (3, 1), 7))
+    def test_is_unique_not_on_column(self):
+        self.assertFalse(is_unique(7, (3, 1), [[1, 3, 5, 7, 9], [2, 4, 6, 0, 0]]))
     
-    def test_is_safe_not_on_row(self):
-        self.assertFalse(is_safe([[1, 3, 5, 7, 9], [2, 4, 6, 8, 0]], (3, 1), 8))
+    def test_is_unique_not_on_row(self):
+        self.assertFalse(is_unique(8, (3, 1), [[1, 3, 5, 7, 9], [2, 4, 6, 8, 0]]))
 
-    def test_is_safe_on_column(self):
-        self.assertTrue(is_safe([[1, 3, 5, 7, 9], [2, 4, 6, 0, 0]], (3, 1), 8))
+    def test_is_unique_on_column(self):
+        self.assertTrue(is_unique(8, (3, 1), [[1, 3, 5, 7, 9], [2, 4, 6, 0, 0]]))
         
-    def test_is_safe_on_row(self):
-        self.assertTrue(is_safe([[1, 3, 5, 7, 9], [2, 4, 6, 8, 0]], (3, 1), 9))  
+    def test_is_unique_on_row(self):
+        self.assertTrue(is_unique(9, (3, 1), [[1, 3, 5, 7, 9], [2, 4, 6, 8, 0]]))  
 
-    def test_is_safe_on_block_1(self):
-        self.assertTrue(is_safe(self.unfinished_sudoku, (2, 1), 1))
+    def test_is_unique_on_block_1(self):
+        self.assertTrue(is_unique(1, (2, 1), self.unfinished_sudoku))
     
-    def test_is_safe_on_block_2(self):
-        self.assertTrue(is_safe(self.unfinished_sudoku, (4, 1), 3))
+    def test_is_unique_on_block_2(self):
+        self.assertTrue(is_unique(3, (4, 1), self.unfinished_sudoku))
     
-    def test_is_safe_on_block_3(self):
-        self.assertTrue(is_safe(self.unfinished_sudoku, (7, 1), 1))
+    def test_is_unique_on_block_3(self):
+        self.assertTrue(is_unique(1, (7, 1), self.unfinished_sudoku))
     
-    def test_is_safe_on_block_4(self):
-        self.assertTrue(is_safe(self.unfinished_sudoku, (1, 4), 1))
+    def test_is_unique_on_block_4(self):
+        self.assertTrue(is_unique(1, (1, 4), self.unfinished_sudoku))
     
-    def test_is_safe_on_block_5(self):
-        self.assertTrue(is_safe(self.unfinished_sudoku, (3, 3), 6))
+    def test_is_unique_on_block_5(self):
+        self.assertTrue(is_unique(6, (3, 3), self.unfinished_sudoku))
 
-    def test_is_safe_on_block_6(self):
-        self.assertTrue(is_safe(self.unfinished_sudoku, (7, 4), 1))
+    def test_is_unique_on_block_6(self):
+        self.assertTrue(is_unique(1, (7, 4), self.unfinished_sudoku))
     
-    def test_is_safe_on_block_7(self):
-        self.assertTrue(is_safe(self.unfinished_sudoku, (1, 7), 1))
+    def test_is_unique_on_block_7(self):
+        self.assertTrue(is_unique(1, (1, 7), self.unfinished_sudoku))
     
-    def test_is_safe_on_block_8(self):
-        self.assertTrue(is_safe(self.unfinished_sudoku, (4, 7), 2))
+    def test_is_unique_on_block_8(self):
+        self.assertTrue(is_unique(2, (4, 7), self.unfinished_sudoku))
 
-    def test_is_safe_on_block_9(self):
-        self.assertTrue(is_safe(self.unfinished_sudoku, (8, 6), 9))
+    def test_is_unique_on_block_9(self):
+        self.assertTrue(is_unique(9, (8, 6), self.unfinished_sudoku))
 
     # Utility functions
 
