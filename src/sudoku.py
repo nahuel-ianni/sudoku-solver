@@ -72,6 +72,10 @@ def solve(grid):
     for digit in range(1, 10):
         if is_unique(digit, (x, y), grid):
             grid[y][x] = digit
-            solve(grid)    
+            
+            if solve(grid):
+                return grid
+                
+            grid[y][x] = 0
     
-    return grid
+    return False
