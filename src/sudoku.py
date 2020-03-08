@@ -20,7 +20,7 @@ def find_empty_location(grid):
 def is_completed(grid):
     """
     Checks if a grid is completed.
-    Grids are completed when all cells in a grid contain non-zero values.
+    Grids are completed when all cells in them contain non-zero values.
     
     Arguments:
         grid {number matrix} -- The matrix to check for unique values on rows and columns
