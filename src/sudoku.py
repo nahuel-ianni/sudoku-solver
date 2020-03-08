@@ -42,23 +42,18 @@ def is_safe(grid, cell, digit):
     Returns:
         Boolean -- True if the digit is unique on its respective row and column, otherwise, False
     """
-    y, x = cell
-
-    if digit in [*grid[x], *[row[y] for row in grid]]:
-        return False
-
-    row_level = x // 3
-    col_level = y // 3
-    subgrid = []
+    x, y = cell
+    column = [row[x] for row in grid]
+    row = grid[y]
     
-    for index, row in enumerate(grid):
-        if index in range(row_level * 3, row_level * 3 + 3):
-            subgrid.append(row[col_level * 3 : col_level * 3 + 3])
+    col_min = (x // 3) * 3
+    row_min = (y // 3) * 3
+    subgrid = [
+        row[col_min : col_min + 3] 
+        for index, row in enumerate(grid) 
+        if row_min <= index < row_min + 3]
 
-    if digit in subgrid:
-        return False
-
-    return True
+    return digit not in [*row, *column, *subgrid]
 
 
 def solve(grid):
