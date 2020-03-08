@@ -1,22 +1,20 @@
 import unittest
 
-from sudoku import Sudoku, is_completed, is_safe
+from sudoku import find_empty_location, is_completed, is_safe, solve
 
 
 class SudokuTest(unittest.TestCase):
-    def test_sudoku_stores_original_grid(self):
-        self.assertEqual(Sudoku(self.unfinished_sudoku).original, self.unfinished_sudoku)
     
     # Find empty location function tests
 
     def test_find_empty_location_no_result(self):
-        self.assertIsNone(Sudoku([[1, 2], [3, 4]]).find_empty_location())
+        self.assertIsNone(find_empty_location([[1, 2], [3, 4]]))
 
     def test_find_empty_location_several_locations(self):
-        self.assertEqual(Sudoku([[1, 0], [0, 0]]).find_empty_location(), (0, 1))
+        self.assertEqual(find_empty_location([[1, 0], [0, 0]]), (1, 0))
 
     def test_find_empty_location_unique_location(self):
-        self.assertEqual(Sudoku([[1, 2], [3, 0]]).find_empty_location(), (1, 1))
+        self.assertEqual(find_empty_location([[1, 2], [3, 0]]), (1, 1))
 
     # Is completed function tests
 
@@ -41,16 +39,43 @@ class SudokuTest(unittest.TestCase):
     # Is safe function tests
 
     def test_is_safe_not_on_column(self):
-        self.assertFalse(is_safe([[1, 3, 5, 7, 9], [2, 4, 6, 0, 0]], (1, 3), 7))
+        self.assertFalse(is_safe([[1, 3, 5, 7, 9], [2, 4, 6, 0, 0]], (3, 1), 7))
     
     def test_is_safe_not_on_row(self):
-        self.assertFalse(is_safe([[1, 3, 5, 7, 9], [2, 4, 6, 8, 0]], (1, 3), 8))
+        self.assertFalse(is_safe([[1, 3, 5, 7, 9], [2, 4, 6, 8, 0]], (3, 1), 8))
 
     def test_is_safe_on_column(self):
-        self.assertTrue(is_safe([[1, 3, 5, 7, 9], [2, 4, 6, 0, 0]], (1, 3), 8))
+        self.assertTrue(is_safe([[1, 3, 5, 7, 9], [2, 4, 6, 0, 0]], (3, 1), 8))
         
     def test_is_safe_on_row(self):
-        self.assertTrue(is_safe([[1, 3, 5, 7, 9], [2, 4, 6, 8, 0]], (1, 3), 9))
+        self.assertTrue(is_safe([[1, 3, 5, 7, 9], [2, 4, 6, 8, 0]], (3, 1), 9))  
+
+    def test_is_safe_on_block_1(self):
+        self.assertTrue(is_safe(self.unfinished_sudoku, (2, 1), 1))
+    
+    def test_is_safe_on_block_2(self):
+        self.assertTrue(is_safe(self.unfinished_sudoku, (4, 1), 3))
+    
+    def test_is_safe_on_block_3(self):
+        self.assertTrue(is_safe(self.unfinished_sudoku, (7, 1), 1))
+    
+    def test_is_safe_on_block_4(self):
+        self.assertTrue(is_safe(self.unfinished_sudoku, (1, 4), 1))
+    
+    def test_is_safe_on_block_5(self):
+        self.assertTrue(is_safe(self.unfinished_sudoku, (3, 3), 6))
+
+    def test_is_safe_on_block_6(self):
+        self.assertTrue(is_safe(self.unfinished_sudoku, (7, 4), 1))
+    
+    def test_is_safe_on_block_7(self):
+        self.assertTrue(is_safe(self.unfinished_sudoku, (1, 7), 1))
+    
+    def test_is_safe_on_block_8(self):
+        self.assertTrue(is_safe(self.unfinished_sudoku, (4, 7), 2))
+
+    def test_is_safe_on_block_9(self):
+        self.assertTrue(is_safe(self.unfinished_sudoku, (8, 6), 9))
 
     # Utility functions
 
