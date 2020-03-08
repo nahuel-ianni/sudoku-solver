@@ -1,4 +1,5 @@
-"""[summary]
+"""
+Sudoku solver script using a backtracking algorithm.
 """
 
 def find_empty_location(grid):
@@ -26,13 +27,14 @@ def is_completed(grid):
         grid {number matrix} -- The matrix to check for unique values on rows and columns
     
     Returns:
-        Boolean -- True if all numbers are unique on their respective rows and columns, otherwise, False
+        bool -- True if all numbers are unique on their respective rows and columns, otherwise, False
     """
     return not any(0 in row for row in grid)
 
 
 def is_unique(digit, cell, grid):
-    """Checks if a given digit is unique across its row, column and subgrid.
+    """
+    Checks if a given digit is unique across its row, column and subgrid.
     
     Arguments:
         digit {number} -- The digit to check for
@@ -40,7 +42,7 @@ def is_unique(digit, cell, grid):
         grid {number matrix} -- The matrix to check the digit at
 
     Returns:
-        Boolean -- True if the digit is unique on its respective row, column and subgrid, otherwise, False
+        bool -- True if the digit is unique on its respective row, column and subgrid, otherwise, False
     """
     x, y = cell
     x_axis = [row[x] for row in grid]
@@ -63,6 +65,12 @@ def solve(grid):
         - Only numbers from 1 to 9 are valid
         - No duplicates on either rows nor columns
         - No duplicates within the special 3x3 subgrids
+    
+    Arguments:
+        grid {number matrix} -- The matrix to solve
+    
+    Returns:
+        solution -- Returns a list of lists filled with numbers if a solution was found, otherwise, False
     """
     if is_completed(grid):
         return grid
