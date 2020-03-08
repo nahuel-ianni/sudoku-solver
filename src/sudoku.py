@@ -43,17 +43,18 @@ def is_unique(digit, cell, grid):
         Boolean -- True if the digit is unique on its respective row, column and subgrid, otherwise, False
     """
     x, y = cell
-    column = [row[x] for row in grid]
-    row = grid[y]
+    x_axis = [row[x] for row in grid]
+    y_axis = grid[y]
     
-    col_min = (x // 3) * 3
-    row_min = (y // 3) * 3
-    subgrid = [
-        row[col_min : col_min + 3] 
-        for index, row in enumerate(grid) 
-        if row_min <= index < row_min + 3]
+    col_level = (x // 3) * 3
+    row_level = (y // 3) * 3
+    subgrid = []
 
-    return digit not in [*row, *column, *subgrid]
+    for index, row in enumerate(grid):
+        if row_level <= index < row_level + 3:
+            subgrid += row[col_level : col_level + 3]
+
+    return digit not in [*y_axis, *x_axis, *subgrid]
 
 
 def solve(grid):
