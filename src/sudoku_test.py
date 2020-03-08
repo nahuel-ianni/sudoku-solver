@@ -77,6 +77,17 @@ class SudokuTest(unittest.TestCase):
     def test_is_unique_on_block_9(self):
         self.assertTrue(is_unique(9, (8, 6), self.unfinished_sudoku))
 
+    # Solve function
+
+    def test_solve_finished_grid_returns_correct_grid(self):
+        self.assertEqual(solve(self.finished_sudoku), self.finished_sudoku)
+
+    def test_solve_unfinished_grid_returns_correct_grid(self):
+        self.assertEqual(solve(self.unfinished_sudoku), self.unfinished_sudoku)
+    
+    def test_solve_unsolvable_grid_returns_correct_grid(self):
+        self.assertEqual(solve(self.unsolvable_sudoku), self.unsolvable_sudoku)
+
     # Utility functions
 
     finished_sudoku = [

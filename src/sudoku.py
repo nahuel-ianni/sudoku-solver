@@ -63,4 +63,14 @@ def solve(grid):
         - No duplicates on either rows nor columns
         - No duplicates within the special 3x3 subgrids
     """
-    raise NotImplementedError
+    if is_completed(grid):
+        return grid
+    
+    x, y = find_empty_location(grid)
+
+    for digit in range(1, 10):
+        if is_unique(digit, (x, y), grid):
+            grid[y][x] = digit
+            solve(grid)    
+    
+    return grid
