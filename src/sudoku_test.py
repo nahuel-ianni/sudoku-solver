@@ -57,22 +57,22 @@ class SudokuTest(unittest.TestCase):
         self.assertTrue(is_unique(3, (4, 1), self.unfinished_sudoku))
     
     def test_is_unique_on_block_3(self):
-        self.assertTrue(is_unique(1, (7, 1), self.unfinished_sudoku))
+        self.assertTrue(is_unique(6, (7, 1), self.unfinished_sudoku))
     
     def test_is_unique_on_block_4(self):
         self.assertTrue(is_unique(1, (1, 4), self.unfinished_sudoku))
     
     def test_is_unique_on_block_5(self):
-        self.assertTrue(is_unique(6, (3, 3), self.unfinished_sudoku))
+        self.assertTrue(is_unique(4, (3, 3), self.unfinished_sudoku))
 
     def test_is_unique_on_block_6(self):
         self.assertTrue(is_unique(1, (7, 4), self.unfinished_sudoku))
     
     def test_is_unique_on_block_7(self):
-        self.assertTrue(is_unique(1, (1, 7), self.unfinished_sudoku))
+        self.assertTrue(is_unique(6, (1, 7), self.unfinished_sudoku))
     
     def test_is_unique_on_block_8(self):
-        self.assertTrue(is_unique(2, (4, 7), self.unfinished_sudoku))
+        self.assertTrue(is_unique(3, (4, 7), self.unfinished_sudoku))
 
     def test_is_unique_on_block_9(self):
         self.assertTrue(is_unique(9, (8, 6), self.unfinished_sudoku))
@@ -80,26 +80,37 @@ class SudokuTest(unittest.TestCase):
     # Solve function
 
     def test_solve_finished_grid_returns_correct_grid(self):
-        self.assertEqual(solve(self.finished_sudoku), self.finished_sudoku)
+        self.assertEqual(solve(self.finished_sudoku.copy()), self.finished_sudoku)
 
     def test_solve_unfinished_grid_returns_correct_grid(self):
-        self.assertEqual(solve(self.unfinished_sudoku), self.unfinished_sudoku)
+        self.assertEqual(solve(self.unfinished_sudoku.copy()), self.finished_sudoku)
     
     def test_solve_unsolvable_grid_returns_correct_grid(self):
-        self.assertEqual(solve(self.unsolvable_sudoku), self.unsolvable_sudoku)
+        self.assertEqual(solve(self.unsolvable_sudoku.copy()), self.unsolvable_sudoku)
 
     # Utility functions
 
-    finished_sudoku = [
-        [2, 9, 6, 3, 1, 8, 5, 7, 4],
-        [5, 8, 4, 9, 7, 2, 6, 1, 3],
-        [7, 1, 3, 6, 4, 5, 2, 8, 9],
-        [6, 2, 5, 8, 9, 7, 3, 4, 1],
-        [9, 3, 1, 4, 2, 6, 8, 5, 7],
-        [4, 7, 8, 5, 3, 1, 9, 2, 6],
-        [1, 6, 7, 2, 5, 3, 4, 9, 8],
-        [8, 5, 9, 7, 6, 4, 1, 3, 2],
-        [3, 4, 2, 1, 8, 9, 7, 6, 5]]
+    # finished_sudoku = [
+    #     [2, 9, 6, 3, 1, 8, 5, 7, 4],
+    #     [5, 8, 4, 9, 7, 2, 6, 1, 3],
+    #     [7, 1, 3, 6, 4, 5, 2, 8, 9],
+    #     [6, 2, 5, 8, 9, 7, 3, 4, 1],
+    #     [9, 3, 1, 4, 2, 6, 8, 5, 7],
+    #     [4, 7, 8, 5, 3, 1, 9, 2, 6],
+    #     [1, 6, 7, 2, 5, 3, 4, 9, 8],
+    #     [8, 5, 9, 7, 6, 4, 1, 3, 2],
+    #     [3, 4, 2, 1, 8, 9, 7, 6, 5]]
+
+    finished_sudoku =[
+        [3, 1, 6, 5, 7, 8, 4, 9, 2],
+        [5, 2, 9, 1, 3, 4, 7, 6, 8],
+        [4, 8, 7, 6, 2, 9, 5, 3, 1],
+        [2, 6, 3, 4, 1, 5, 9, 8, 7],
+        [9, 7, 4, 8, 6, 3, 1, 2, 5],
+        [8, 5, 1, 7, 9, 2, 6, 4, 3],
+        [1, 3, 8, 9, 4, 7, 2, 5, 6],
+        [6, 9, 2, 3, 5, 1, 8, 7, 4],
+        [7, 4, 5, 2, 8, 6, 3, 1, 9]] 
 
     unfinished_sudoku =[
         [3, 0, 6, 5, 0, 8, 4, 0, 0],
