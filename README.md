@@ -21,7 +21,7 @@ Pytest can easily execute all tests in a file by executing the `pytest` command 
 
 If you want to execute all tests on a particular file, the command accepts a path as a parameter: `pytest <filename>.py`.
 
-## Authors
+## Author
 
 * **Nahuel Ianni** - *Where to find me* - [github](https://github.com/nahuel-ianni), [linkedIn](https://www.linkedin.com/in/nahuelianni/)
 
